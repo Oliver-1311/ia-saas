@@ -1,9 +1,8 @@
 import type { Metadata } from "next";
 import { IBM_Plex_Sans as FontSans } from "next/font/google";
 import "./globals.css";
-import { Variable } from "lucide-react";
 import { cn } from "@/lib/utils";
-
+import { ClerkProvider } from "@clerk/nextjs";
 const fontSans = FontSans({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
@@ -21,15 +20,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body
-        className={cn(
-          "min-h-screen bg-background font-sans antialiased",
-          fontSans.variable
-        )}
-      >
-        {children}
-      </body>
-    </html>
+    <ClerkProvider>
+      <html lang="en">
+        <body
+          className={cn(
+            "min-h-screen bg-background font-sans antialiased",
+            fontSans.variable
+          )}
+        >
+          {children}
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }
